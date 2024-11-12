@@ -1,12 +1,29 @@
 version: '3.4'
 
 services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=13032004
+      - POSTGRES_USER=senderion
+      - POSTGRES_DB=family-todo
+    container_name: postgres
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
   api:
-    image: api
     build:
       context: .
       dockerfile: ./Dockerfile
     environment:
       NODE_ENV: development
     ports:
-      - 3000:3000
+      - '3000:3000'
+    container_name: family-todo-api
+    depends_on:
+      - db
+    volumes:
+      - ./src:/app/src
