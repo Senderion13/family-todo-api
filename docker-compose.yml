@@ -10,7 +10,7 @@ services:
       - POSTGRES_DB=family-todo
     container_name: postgres
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      - ../pgdata:/var/lib/postgresql/data
     ports:
       - '5432:5432'
 
